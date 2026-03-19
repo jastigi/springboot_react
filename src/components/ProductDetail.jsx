@@ -8,7 +8,7 @@ export const ProductDetail = ({product = {}, handlerRemove, handlerUpdate}) => {
             <td>{product.description}</td>
             <td>
                 <button className="btn btn-warning" onClick={() => handlerUpdate(product)}>Actualizar</button>
-                <button className="btn btn-danger" onClick={() => handlerRemove(product.name)}>Eliminar</button>
+                <button className="btn btn-danger" onClick={() => handlerRemove(product.id)}>Eliminar</button>
             </td>
         </tr>
     )
