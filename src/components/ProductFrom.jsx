@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import PropTypes from 'prop-types'
 
 const initialDataForm = {
     id: 0,
@@ -55,4 +56,9 @@ export const ProductFrom = ({handlerAdd, productSelected}) => {
             </div>
         </form>
     )
+}
+
+ProductFrom.propTypes = {
+    handlerAdd: PropTypes.func.isRequired,
+    productSelected: PropTypes.object.isRequired
 }

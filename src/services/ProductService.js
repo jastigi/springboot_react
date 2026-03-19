@@ -22,3 +22,33 @@ export const findAll = async () => {
     return null;
 }
 
+export const create = async ({name, price, description}) => {
+    try {
+        const response = await axios.post(BASE_URL, {name, price, description});
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+    return null;
+}
+
+export const update = async ({id, name, price, description}) => {
+    try {
+        const response = await axios.put(`${BASE_URL}/${id}`, {name, price, description});
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+    return null;
+}
+
+export const remove = async (id) => {
+    try {
+        const response = await axios.delete(`${BASE_URL}/${id}`);
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+    return null;
+}
+

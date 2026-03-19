@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
-import { findAll } from "../services/ProductService";
+import { findAll, create, update } from "../services/ProductService";
 import { ProductGrid } from "./ProductGrid";
 import { ProductFrom } from "./ProductFrom";
 import PropTypes from 'prop-types'
@@ -26,15 +27,19 @@ export const ProductApp = ({title}) => {
         getProducts();
     }, []);
 
-    const handlerAddProduct = (product) => {
+    const handlerAddProduct = async (product) => {
+        //console.log(product);
         if(product.id > 0){
+            const response = await update(product);
+            console.log(response);
             setProducts(products.map(p => {
             if(p.id === product.id) {
-                return {...product}
+                return {...response.data}
             } else return p;
         }));
         } else {
-            setProducts([...products, {...product, id: new Date().getTime()}]);
+            const response = await create(product);
+            setProducts([...products, {...response.data}]);
         }
     }
 
