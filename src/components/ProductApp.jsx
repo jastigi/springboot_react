@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
-import { findAll, create, update } from "../services/ProductService";
+import { findAll, create, update, remove } from "../services/ProductService";
 import { ProductGrid } from "./ProductGrid";
 import { ProductFrom } from "./ProductFrom";
 import PropTypes from 'prop-types'
@@ -45,6 +45,7 @@ export const ProductApp = ({title}) => {
 
     const handlerRemoveProduct = (id) => {
         console.log(id);
+        remove(id);
         setProducts(products.filter(product => product.id !== id));
     }
 
