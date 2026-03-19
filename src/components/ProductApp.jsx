@@ -15,11 +15,16 @@ export const ProductApp = ({title}) => {
         setProducts(result);
     }, []);
 
+    const handlerAddProduct = (product) => {
+        console.log(product);
+        setProducts([...products, {...product}]);
+    }
+
     return (
         <div>
             <h1>{title.text}</h1>
             <div>
-                <ProductFrom />
+                <ProductFrom handlerAdd={handlerAddProduct}/>
             </div>
             <div>
                 <ProductGrid products={products} />
