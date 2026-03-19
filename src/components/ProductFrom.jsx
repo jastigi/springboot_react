@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const initialDataForm = {
     name: '',
@@ -6,11 +6,15 @@ const initialDataForm = {
     description: ''
 }
 
-export const ProductFrom = ({handlerAdd}) => {
+export const ProductFrom = ({handlerAdd, productSelected}) => {
     const [form, setForm] = useState(initialDataForm);
 
     const {name, price, description} = form;
     
+    useEffect(() => {
+        setForm(productSelected);
+    }, [productSelected]);
+
     return (
         <form onSubmit={(event) => {
             event.preventDefault();
@@ -22,7 +26,7 @@ export const ProductFrom = ({handlerAdd}) => {
 
             console.log(form);
             handlerAdd(form);
-            setForm(initialDataForm);            
+            setForm(initialDataForm);
         }}>
             <div>
                 <input style={{'marginBottom': '4px'}} type="text" 
@@ -44,7 +48,7 @@ export const ProductFrom = ({handlerAdd}) => {
                     name="" 
                     value={price} 
                     onChange={(event) => setForm({...form, price: event.target.value})} />
-            </div>            
+            </div>
             <div>
                 <button type="submit">Agregar</button>
             </div>
