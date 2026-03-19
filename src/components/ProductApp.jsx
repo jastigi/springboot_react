@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
-import { listProducts } from "../services/ProductService";
+import { findAll } from "../services/ProductService";
 import { ProductGrid } from "./ProductGrid";
 import { ProductFrom } from "./ProductFrom";
 import PropTypes from 'prop-types'
@@ -15,11 +16,14 @@ export const ProductApp = ({title}) => {
         description: ''
     })
 
-    useEffect(() => {
-        const result = listProducts();
+    const getProducts = async ()=> {
+        const result = await findAll();
         console.log(result);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        setProducts(result);
+        setProducts(result.data._embedded.products);
+    }
+
+    useEffect(() => {
+        getProducts();
     }, []);
 
     const handlerAddProduct = (product) => {
