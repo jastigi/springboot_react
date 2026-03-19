@@ -24,9 +24,9 @@ export const ProductApp = ({title}) => {
 
     const handlerAddProduct = (product) => {
         if(product.id > 0){
-            setProducts(products.map(p => { 
-            if(p.id === product.id) { 
-                return {...product} 
+            setProducts(products.map(p => {
+            if(p.id === product.id) {
+                return {...product}
             } else return p;
         }));
         } else {
@@ -45,13 +45,18 @@ export const ProductApp = ({title}) => {
     }
 
     return (
-        <div>
-            <h1>{title.text}</h1>
-            <div>
-                <ProductFrom handlerAdd={handlerAddProduct} productSelected={productSelected}/>
-            </div>
-            <div>
-                <ProductGrid products={products} handlerRemove={handlerRemoveProduct} handlerUpdate={handlerUpdateProduct}/>
+        <div className="container my-4">
+            <h2>{title.text}</h2>
+            <div className="row">
+                <div className="col">
+                    <ProductFrom handlerAdd={handlerAddProduct} productSelected={productSelected}/>
+                </div>
+                <div className="col">
+                    {
+                        products.length > 0? <ProductGrid products={products} handlerRemove={handlerRemoveProduct} handlerUpdate={handlerUpdateProduct}/>
+                        : <div className="alert alert-warning">No hay productos en el sistema!</div>
+                    }
+                </div>
             </div>
         </div>
     )
